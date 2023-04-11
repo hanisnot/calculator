@@ -39,44 +39,4 @@ body {
   border: none;
   border-radius: 5px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2),
-let result = document.getElementById("result");
-let clearButton = document.getElementById("button-clear");
-let equalsButton = document.getElementById("button-equals");
-let decimalButton = document.getElementById("button-decimal");
 
-let numberButtons = document.querySelectorAll(".number-button");
-let operatorButtons = document.querySelectorAll(".operator-button");
-
-let currentNumber = "";
-let currentOperator = null;
-let resultNumber = null;
-
-function handleNumberButtonClick(number) {
-  currentNumber += number;
-  result.innerHTML = currentNumber;
-}
-
-function handleOperatorButtonClick(operator) {
-  if (currentOperator !== null) {
-    handleEqualsButtonClick();
-  }
-  currentOperator = operator;
-  resultNumber = Number(currentNumber);
-  currentNumber = "";
-}
-
-function handleEqualsButtonClick() {
-  if (currentOperator === null) {
-    return;
-  }
-  let newNumber = Number(currentNumber);
-  let calculation;
-  switch (currentOperator) {
-    case "+":
-      calculation = resultNumber + newNumber;
-      break;
-    case "-":
-      calculation = resultNumber - newNumber;
-      break;
-    case "×":
-      calculation = resultNumber * newNumber;
