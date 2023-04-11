@@ -1,0 +1,82 @@
+body {
+  font-family: sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f0f0;
+}
+
+.calculator {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  gap: 10px;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.result {
+  grid-column: 1 / -1;
+  background-color: #fff;
+  color: #333;
+  font-size: 2.5rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 10px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2),
+    0 2px 2px rgba(0, 0, 0, 0.2), 0 4px 4px rgba(0, 0, 0, 0.2),
+    0 8px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+}
+
+.number-button,
+.operator-button {
+  font-size: 1.5rem;
+  color: #fff;
+  background-color: #333;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2),
+let result = document.getElementById("result");
+let clearButton = document.getElementById("button-clear");
+let equalsButton = document.getElementById("button-equals");
+let decimalButton = document.getElementById("button-decimal");
+
+let numberButtons = document.querySelectorAll(".number-button");
+let operatorButtons = document.querySelectorAll(".operator-button");
+
+let currentNumber = "";
+let currentOperator = null;
+let resultNumber = null;
+
+function handleNumberButtonClick(number) {
+  currentNumber += number;
+  result.innerHTML = currentNumber;
+}
+
+function handleOperatorButtonClick(operator) {
+  if (currentOperator !== null) {
+    handleEqualsButtonClick();
+  }
+  currentOperator = operator;
+  resultNumber = Number(currentNumber);
+  currentNumber = "";
+}
+
+function handleEqualsButtonClick() {
+  if (currentOperator === null) {
+    return;
+  }
+  let newNumber = Number(currentNumber);
+  let calculation;
+  switch (currentOperator) {
+    case "+":
+      calculation = resultNumber + newNumber;
+      break;
+    case "-":
+      calculation = resultNumber - newNumber;
+      break;
+    case "×":
+      calculation = resultNumber * newNumber;
